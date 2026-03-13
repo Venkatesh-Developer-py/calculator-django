@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <style>
+/* --- MAIN WRAPPER --- */
+body {
+    background: linear-gradient(135deg, #0a0f24, #1b2640);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+/* --- CALCULATOR BOX --- */
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 12px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* --- DISPLAY SCREEN --- */
+#zero {
+    grid-column: span 4;
+    height: 70px;
+    border-radius: 12px;
+    border: none;
+    padding: 15px;
+    font-size: 26px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    text-align: right;
+    box-shadow: inset 0 0 10px rgba(0,255,255,0.4);
+    font-weight: 600;
+}
+
+/* --- BUTTONS --- */
+button {
+    height: 65px;
+    border-radius: 12px;
+    border: none;
+    font-size: 22px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    transition: 0.2s;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
+
+/* --- OPERATOR BUTTONS --- */
+button.op {
+    background: #00ff99;
+    color: #00331a;
+    font-weight: 700;
+}
+
+button.op:hover {
+    background: #00cc77;
+}
+
+/* --- EQUAL BUTTON --- */
+button.equal {
+    background: #ff0066;
+    color: white;
+}
+
+button.equal:hover {
+    background: #d60055;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#cal {
+    margin-top: 0;
+}
+    </style>
+</head>
+<body>
+    <div>
+        <div id="cal">
+    <h1>Calculator♥️✨</h1>
+    </div>
+    <div class="calculator">
+    <div id="zero">0</div>
+
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button class="op" onclick="append('+')">+</button>
+
+    <button onclick="append('6')">6</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('4')">4</button>
+    <button class="op" onclick="append('-')">-</button>
+
+    <button onclick="append('3')">3</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('1')">1</button>
+    <button class="op" onclick="append('*')">*</button>
+
+    <button class="op" onclick="append('/')">/</button>
+    <button onclick="clear123()">C</button>
+    <button class="equal" onclick="evaluate123()">=</button>
+    <button class="op" onclick="append('%')">%</button>
+</div>
+</div>
+
+    <script>
+        function clear123(){
+            document.getElementById("zero").innerText='0';
+        }
+        function append(value){
+            x=document.getElementById("zero").innerText;
+            if(x==0){
+                document.getElementById("zero").innerText=value;
+            }
+            else if(
+                (x.endsWith('+')||x.endsWith('-')||x.endsWith('*')||x.endsWith('/')||x.endsWith('%'))&&
+                (value==="+"||value==='-'||value==='/'||value==='*'||value==='%')
+            ){
+                return;
+            }
+            else{
+                document.getElementById("zero").innerText=x+value;
+            }
+        }
+    function evaluate123(){
+        let m=document.getElementById("zero");
+        m.innerText=eval(m.innerText);
+    }
+
+    </script>
+</body>
+</html>
